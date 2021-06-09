@@ -1,0 +1,21 @@
+//- Usamos el layout como una plantilla
+extends layout
+
+//- Incluimos el mixin de nombre crearProyecto en el archivo
+include mixins/crearProyecto
+
+
+block contenido
+    .contenido-principal
+        h1 #{nombrePagina}
+
+        pre= vardump(proyecto)
+
+        if errores
+            each error in errores
+                .error.alerta= error.texto
+                
+        //- usamos el mixin agregado
+        //- tenemos que pasar el proyecto pasado por el controller crearProy.
+        //- Cuando editamos usamos el proyecto por defecto. (proy vacio)
+        +crearProyecto(proyecto) 
