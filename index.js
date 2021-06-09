@@ -4,6 +4,8 @@ const express = require('express');
 const routes = require('./routes');
 const path = require('path');
 const bodyParser = require('body-parser');
+const expressValidator = require('express-validator');
+const flash = require('connect-flash');
 
 const app = express();
 
@@ -27,6 +29,10 @@ app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, './views'));
 
 app.use(express.static('public'));
+
+
+// agregar flash messages
+app.use(flash());
 
 app.use((req, res, next) => {
     console.log('yo soy un middleware')
