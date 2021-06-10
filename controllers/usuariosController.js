@@ -20,7 +20,7 @@ exports.crearCuenta = async (req, res) => {
         res.redirect('/iniciar-sesion');
     } catch (error) {
         res.render('crearCuenta', {
-            error: error.errors,
+            errores: error.errors,
             nombrePagina: 'Crear cuenta en Uptask'
         });
     }
