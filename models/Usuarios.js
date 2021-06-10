@@ -14,6 +14,9 @@ const Usuarios = db.define('usuario', {
     email: {
         type: Sequelize.STRING(60),
         allowNull: false,
+        unique: {
+            msg: 'Usuario ya registrado'
+        },
         validate: {
             isEmail: {
                 msg: 'Agrega un correo válido'
@@ -21,10 +24,6 @@ const Usuarios = db.define('usuario', {
             notEmpty: {
                 msg: 'El email no puede ir vacio'
             }
-        },
-        unique: {
-            args: true,
-            msg: 'Usuario ya registrado'
         }
     },
     password: {
