@@ -6,8 +6,10 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 const flash = require('connect-flash');
+const session = require('express-session');
+const cookieParse = require('cookie-parser');
 
-const app = express();
+
 
 const helpers = require('./helpers');
 
@@ -20,23 +22,40 @@ require('./models/Usuarios');
 
 db.sync()
     .then(() => console.log('Conectado al Servidor'))
-    .catch((error) => console.log(error))
+    .catch((error) => console.log(error));
 
+//crea una app express
+const app = express();
+
+//donde carga los archivos estaticos
+app.use(express.static('public'));
 
 //establecer pug como template engine
 app.set('view engine', 'pug');
 
+app.use(express.urlencoded({extended: true}));
+//app.use(bodyParser.urlencoded({extended: true}));
+
+//añadir la carpeta de las vistas
 app.set('views', path.join(__dirname, './views'));
-
-app.use(express.static('public'));
-
 
 // agregar flash messages
 app.use(flash());
 
+
+app.use(cookieParse());
+
+//las sesiones nos permiten navegar entre distintas pagians sin volvernos a autenticar
+app.use(session({
+    secret: 'supersecreto',
+    resave: false,
+    saveUninitialized: false
+}))
+
 app.use((req, res, next) => {
     console.log('yo soy un middleware')
     res.locals.vardump = helpers.vardump;
+    res.locals.mensajes = req.flash();
     next();
 });
 
@@ -48,8 +67,7 @@ app.use((req, res, next) => {
 });
 
 
-app.use(express.urlencoded({extended: true}));
-//app.use(bodyParser.urlencoded({extended: true}));
+
 
 /* 
 const productos = [
