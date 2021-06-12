@@ -47,5 +47,8 @@ module.exports = function() {
 
     routes.post('/crear-cuenta', usuariosController.crearCuenta );
 
+    //iniciar sesión
+    routes.get('/iniciar-sesion', usuariosController.formIniciarSesion);
+
     return routes;
 }
