@@ -46,6 +46,11 @@ const Usuarios = db.define('usuario', {
 
 //los password siempre se hashean a 60
 
+//metodos personalizados
+Usuarios.prototype.verificarPassword = function( password ) {
+    return bcrypt.compareSync( password, this.password );
+}
+
 //los usuarios pueden crear varios proyectos. 
 //hacemos que las tablas se asocione, creando los foreing key
 Usuarios.hasMany(Proyectos);

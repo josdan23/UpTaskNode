@@ -1,4 +1,4 @@
-doctype html
+<!DOCTYPE html>
 html(lang="en")
     head
         include partials/header
@@ -6,6 +6,8 @@ html(lang="en")
         .contenedor-formulario
             h1 Iniciar Sesión en UpTask
 
+            if error
+                p.alerta.error= error
 
             form#formulario.caja.caja-login(method="POST" action="/iniciar-sesion")
                 .campo 

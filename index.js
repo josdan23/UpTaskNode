@@ -8,7 +8,7 @@ const expressValidator = require('express-validator');
 const flash = require('connect-flash');
 const session = require('express-session');
 const cookieParse = require('cookie-parser');
-
+const passport = require('./config/passport');
 
 
 const helpers = require('./helpers');
@@ -51,6 +51,9 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }))
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use((req, res, next) => {
     console.log('yo soy un middleware')

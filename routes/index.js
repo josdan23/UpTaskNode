@@ -8,7 +8,7 @@ const {body} = require('express-validator');
 const proyectoController = require('../controllers/proyectoController');
 const tareasController = require('../controllers/tareaController');
 const usuariosController = require('../controllers/usuariosController');
-
+const authController = require('../controllers/authController');
 
 module.exports = function() {
 
@@ -49,6 +49,8 @@ module.exports = function() {
 
     //iniciar sesión
     routes.get('/iniciar-sesion', usuariosController.formIniciarSesion);
+
+    routes.post('/iniciar-sesion', authController.autenticarUsuario);
 
     return routes;
 }
