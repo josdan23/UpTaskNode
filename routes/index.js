@@ -12,35 +12,55 @@ const authController = require('../controllers/authController');
 
 module.exports = function() {
 
-    routes.get('/', proyectoController.proyectoHome);
+    routes.get('/',
+        authController.usuarioAutenticado, 
+        proyectoController.proyectoHome);
 
-    routes.get('/nuevo-proyecto', proyectoController.formularioProyecto);
+    routes.get('/nuevo-proyecto',
+        authController.usuarioAutenticado,
+        proyectoController.formularioProyecto);
 
     routes.post('/nuevo-proyecto', 
         body('nombre').not().isEmpty().trim().escape(),
+        authController.usuarioAutenticado,
         proyectoController.nuevoProyecto);
 
-    routes.get('/nosotros', proyectoController.nosotros);
+    routes.get('/nosotros', 
+        authController.usuarioAutenticado,
+        proyectoController.nosotros);
 
-    routes.get('/proyectos/:url', proyectoController.proyectoPorUrl);
+    routes.get('/proyectos/:url', 
+        authController.usuarioAutenticado,
+        proyectoController.proyectoPorUrl);
 
     //Actualizar proyecto
-    routes.get('/proyectos/editar/:id', proyectoController.formularioEditar);
+    routes.get('/proyectos/editar/:id', 
+        authController.usuarioAutenticado,
+        proyectoController.formularioEditar);
 
     routes.post('/nuevo-proyecto/:id', 
         body('nombre').not().isEmpty().trim().escape(),
+        authController.usuarioAutenticado,
         proyectoController.actualizarProyecto);
 
-    routes.delete('/proyectos/:url', proyectoController.eliminarProyecto);
+    routes.delete('/proyectos/:url', 
+        authController.usuarioAutenticado,
+        proyectoController.eliminarProyecto);
 
     //tareas
-    routes.post('/proyectos/:url', tareasController.agregarTarea);
+    routes.post('/proyectos/:url', 
+        authController.usuarioAutenticado,
+        tareasController.agregarTarea);
 
     // Actualizar tareas
-    routes.patch('/tareas/:id', tareasController.cambiarEstadoTarea);
+    routes.patch('/tareas/:id', 
+        authController.usuarioAutenticado,
+        tareasController.cambiarEstadoTarea);
 
     // Eliminar tareas
-    routes.delete('/tareas/:id', tareasController.eliminarTarea);
+    routes.delete('/tareas/:id', 
+        authController.usuarioAutenticado,
+        tareasController.eliminarTarea);
 
     //crear nueva cuenta
     routes.get('/crear-cuenta', usuariosController.formCrearCuenta );
