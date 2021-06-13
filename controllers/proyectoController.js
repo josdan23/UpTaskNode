@@ -47,17 +47,12 @@ exports.nuevoProyecto = async (req, res) => {
             proyectos
         })
     } else {
-        console.log(nombre);
 
-        // Proyectos.create({ nombre })
-        //     .then(() => console.log('Insertado correctamente'))
-        //     .catch((error) => console.log(error));
-
-
-       
+        const usuarioId = res.locals.usuario.id;
 
         const proyecto = await Proyectos.create({
-            nombre
+            nombre,
+            usuarioId
         });
 
         res.redirect('/');

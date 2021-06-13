@@ -59,6 +59,7 @@ app.use((req, res, next) => {
     console.log('yo soy un middleware')
     res.locals.vardump = helpers.vardump;
     res.locals.mensajes = req.flash();
+    res.locals.usuario = {...req.user} || null; //spread operator: crea una copia
     next();
 });
 
