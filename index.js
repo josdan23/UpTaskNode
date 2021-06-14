@@ -102,3 +102,5 @@ app.use('/', (req, res) => {
 app.use('/', routes() );
 
 app.listen(4000);
+
+require('./handlers/email');
