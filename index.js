@@ -74,34 +74,6 @@ app.use((req, res, next) => {
 });
 
 
-
-
-/* 
-const productos = [
-    {
-        nombre: 'computadora',
-        precio: 3000
-    },
-    {
-        nombre: 'libros',
-        precio: 1000
-    }
-]; */
-
-
-//MOVEMOS LAS RUTAS A UN ARCHIVO SEPARADO
-/* 
-app.use('/', (req, res) => {
-    
-    
-    //res.send(prodcannabisuctos);
-    //res.json(productos);
-    //res.render('Hola');
-    //res.send('Hola'); 
-
-});
- */
-
 app.use('/', routes() );
 
 
