@@ -106,7 +106,7 @@ app.use('/', routes() );
 
 
 // Servidor y puerto
-const host = process.env.HOST || 'O.0.0.0';
+const host = process.env.HOST || '0.0.0.0';
 const port = process.env.PORT || 3000;
 
 
